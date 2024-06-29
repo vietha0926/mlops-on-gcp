@@ -22,28 +22,29 @@
 steps:
 # Build the image that encapsulates the pipeline.
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['build', '-t', 'gcr.io/qwiklabs-gcp-02-3e60d5bc3571/lab-03-tfx-image:$TAG_NAME', '.']
+  args: ['build', '-t', 'gcr.io/qwiklabs-gcp-02-f915634f454b/lab-03-tfx-image:$TAG_NAME', '.']
   dir: workshops/tfx-caip-tf23/lab-03-tfx-cicd/labs/pipeline
 
   
-- name: 'gcr.io/qwiklabs-gcp-02-3e60d5bc3571/tfx-cli'
-  args: ['pipeline', 'create', '--engine', 'kubeflow', '--pipeline_path', 'runner.py', '--endpoint', '3cf6a1d763d0c609-dot-us-central1.pipelines.googleusercontent.com']
+- name: 'gcr.io/qwiklabs-gcp-02-f915634f454b/tfx-cli'
+  args: ['pipeline', 'create', '--engine', 'kubeflow', '--pipeline_path', 'runner.py', '--endpoint', '718c783d4ba8a23a-dot-us-central1.pipelines.googleusercontent.com']
   env: 
   - 'GCP_REGION=us-central1'  
-  - 'PROJECT_ID=qwiklabs-gcp-02-3e60d5bc3571'
+  - 'PROJECT_ID=qwiklabs-gcp-02-f915634f454b'
   - 'PIPELINE_NAME=tfx_covertype_continuous_training-${TAG_NAME}'
   - 'MODEL_NAME=tfx_covertype_classifier'  
-  - 'ARTIFACT_STORE_URI=gs://qwiklabs-gcp-02-3e60d5bc3571-kubeflowpipelines-default'
-  - 'CUSTOM_SERVICE_ACCOUNT=tfx-tuner-caip-service-account@qwiklabs-gcp-02-3e60d5bc3571.iam.gserviceaccount.com'
+  - 'ARTIFACT_STORE_URI=gs://qwiklabs-gcp-02-f915634f454b-kubeflowpipelines-default'
+  - 'CUSTOM_SERVICE_ACCOUNT=tfx-tuner-caip-service-account@qwiklabs-gcp-02-f915634f454b.iam.gserviceaccount.com'
   - 'DATA_ROOT_URI=gs://cloud-training/OCBL203/workshop-datasets'
-  - 'KUBEFLOW_TFX_IMAGE=gcr.io/qwiklabs-gcp-02-3e60d5bc3571/lab-03-tfx-image:$TAG_NAME'
+  - 'KUBEFLOW_TFX_IMAGE=gcr.io/qwiklabs-gcp-02-f915634f454b/lab-03-tfx-image:$TAG_NAME'
   - 'RUNTIME_VERSION=2.3'
   - 'PYTHON_VERSION=3.7'
   - 'USE_KFP_SA=False'
   - 'ENABLE_TUNING=True'
-  - 'logging=None'
   dir: workshops/tfx-caip-tf23/lab-03-tfx-cicd/labs/pipeline
+  options:
+    logging: NONE
 
 
 # Push the custom image to Container Registry 
-images: ['gcr.io/qwiklabs-gcp-02-3e60d5bc3571/lab-03-tfx-image:$TAG_NAME']
+images: ['gcr.io/qwiklabs-gcp-02-f915634f454b/lab-03-tfx-image:$TAG_NAME']

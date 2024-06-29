@@ -41,9 +41,8 @@ steps:
   - 'PYTHON_VERSION=3.7'
   - 'USE_KFP_SA=False'
   - 'ENABLE_TUNING=True'
+  - 'CLOUD_BUILD_LOGGING_LEVEL=NONE'
   dir: workshops/tfx-caip-tf23/lab-03-tfx-cicd/labs/pipeline
-  options:
-    logging: NONE
 
 
 # Push the custom image to Container Registry 
